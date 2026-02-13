@@ -1,7 +1,7 @@
 export class CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
+  name!: string;
+  email!: string;
+  password!: string;
 }
 
 export class UpdateUserDto {
@@ -11,6 +11,6 @@ export class UpdateUserDto {
 }
 
 export class LoginUserDto {
-  email: string;
-  password: string;
+  email!: string;
+  password!: string;
 }
