@@ -17,7 +17,7 @@ export class UsersService {
       await this.usersRepo.query('SELECT 1');
       return 'Database connected successfully';
     } catch (error) {
-      return `Database connection failed: ${error.message}`;
+      return `Database connection failed: ${error}`;
     }
   }
 
