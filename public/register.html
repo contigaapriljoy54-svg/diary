@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diary Login</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: url(https://betterlyf-upload.s3.amazonaws.com/1672910170319.jpg) no-repeat center center fixed;
+    background-size: cover;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: -1;
+  }
+  h2 {
+    text-align: center;
+    margin-top: 50px;
+    text-shadow: 2px 2px 4px #000;
+  }
+  form {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
+  input {
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: 0.9;
+  }
+  #msg {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  #registerLink {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h2>Login to Your Diary</h2>
+
+<form id="loginForm">
+  <input id="email" type="email" placeholder="Email" required>
+  <input id="password" type="password" placeholder="Password" required>
+  <button>Login</button>
+</form>
+
+<p id="msg"></p>
+<span id="registerLink">Don't have an account? Register here</span>
+
+<script>
+const loginForm = document.getElementById('loginForm');
+const msg = document.getElementById('msg');
+const registerLink = document.getElementById('registerLink');
+
+registerLink.onclick = () => window.location.href = 'register.html';
+
+loginForm.onsubmit = e => {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if (user) {
+    localStorage.setItem('user', JSON.stringify(user));
+    window.location.href = 'dashboard.html';
+  } else {
+    msg.style.color = 'red';
+    msg.innerText = 'User not found or password incorrect';
+  }
+};
+</script>
+
+</body>
+</html>
